@@ -39,7 +39,9 @@ namespace TareasMVC.Controllers
         public async Task<ActionResult<Tarea>> Get(int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-            var tarea = await context.Tareas.FirstOrDefaultAsync(t => t.Id == id && t.UsuarioCreacionId == usuarioId);
+            var tarea = await context.Tareas
+                .Include(t => t.Pasos.OrderBy(p => p.Orden))
+                .FirstOrDefaultAsync(t => t.Id == id && t.UsuarioCreacionId == usuarioId);
 
             if (tarea is null) return NotFound();
 
