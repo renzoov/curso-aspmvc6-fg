@@ -34,3 +34,14 @@ function confirmarAccion({ callBackAceptar, callBackCancelar, titulo }) {
         else if (callBackCancelar) callBackCancelar();
     })
 }
+
+function descargarArchivo(url, nombre) {
+    var link = document.createElement('a');
+    link.downliad = nombre;
+    link.target = "_blank";
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    delete link;
+}
